@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box1">
+        <div class="box1">
+            <div id="box2">1</div>
+        </div>
+    </div>
+    <div class="box3">4</div>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <script src="../jq/node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        $('#box2').before($('<div>2</div>'))
+        $('button').click(function(){
+            console.log($(this).index('button'))
+        })
+        console.log($('#box2').parents('.box1'))
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #boxShadow {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            opacity: .3;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <div id="box"></div>
+    <script src="../jq/node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        $('#box').mousedown(function(ev){
+            let $box2 = $('<div id = "boxShadow"></div>');
+            $box2.css({
+                left:$('#box').offset().left,//box2的距离等于box的距离
+                top:$('#box').offset().top,
+            })
+            $(body).append($box2);
+            let disX = ev.pageX - $('#box').offset().left;//计算坐标到盒子边框的距离
+            let disY = ev.pageY - $('#box').offset().top;
+            $(document).mousemove(function(ev){
+                $box2.css({
+                    left:ev.pageX - disX,//盒子的绝对定位是坐标减去坐标的盒子边框的距离
+                    top:ev.pageY - disY
+                })
+            })
+            $(document).mouseup(function(ev){
+                $(document).off('mousemove');//清除滑动事件
+                $(document).off('mouseup'); //清除鼠标抬起事件
+                $('#box').css({
+                    left:$box2.offset().left,//box的距离就是box2的距离
+                    top:$box2.offset().top
+                })
+                $box2.remove(); // 清除box2
+            })
+            return false; //清除默认事件。
+        })
+    </script>
+</body>
+
+</html>
